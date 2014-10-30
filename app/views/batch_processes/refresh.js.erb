@@ -1,0 +1,5 @@
+var el = $('td#refresh_<%= @batch_process.id %>').parent().next().find('td:first');
+
+el.fadeOut().fadeIn(function(){
+  el.html('<%= j render(partial: "image_data", locals: {batch_image_data: @image_data} ) %>');
+})

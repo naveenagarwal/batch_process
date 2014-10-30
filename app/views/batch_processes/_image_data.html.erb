@@ -1,0 +1,65 @@
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Scale</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Stagger</th>
+      <th>Coursing</th>
+      <th>Material</th>
+      <th>Mortar</th>
+      <th>Output</th>
+      <th>Status</th>
+      <th>Message</th>
+      <th><%= link_to "Refresh", refresh_batch_process_path(@batch_process.id), data: { remote: true } if @batch_process.refreshable? %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% batch_image_data.each do |image_data| %>
+      <tr id="image_data_row_<%= image_data.id %>" >
+        <td>
+          <%= image_data.id %>
+        </td>
+        <td>
+          <%= image_data.scale %>
+        </td>
+        <td>
+          <%= image_data.width %>
+        </td>
+        <td>
+          <%= image_data.height %>
+        </td>
+        <td>
+          <%= image_data.stagger %>
+        </td>
+        <td>
+          <%= image_data.coursing %>
+        </td>
+        <td>
+          <%= image_data.material %>
+        </td>
+        <td>
+          <%= image_data.mortar %>
+        </td>
+        <td>
+          <%= image_data.output %>
+        </td>
+        <td>
+          <%= image_data.status_name %>
+        </td>
+        <td>
+          <%= image_data.message %>
+        </td>
+        <td>
+          <%= link_to "Download", image_data.output_path, target: "_blank" if image_data.downloadable? %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', remove_image_data_batch_process_path(id: @batch_process.id, image_data_id: image_data.id),
+               method: :delete, data: { remote: true, confirm: 'Are you sure?' } if image_data.can_destroy? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

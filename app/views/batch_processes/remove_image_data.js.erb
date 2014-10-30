@@ -1,0 +1,5 @@
+<% if @image_data.errors.blank? %>
+  $("tr#image_data_row_" + <%= @image_data.id %>).remove();
+<% else %>
+  alert("This record can not be removed");
+<% end %>

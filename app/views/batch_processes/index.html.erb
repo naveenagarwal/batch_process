@@ -1,0 +1,50 @@
+<h1>Listing Batch Processes</h1>
+
+<p class="pull-right">
+  <%= link_to 'New Batch process', new_batch_process_path %>
+</p>
+
+<div class="pull-right"><%= will_paginate @batch_processes %></div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Number of Rows</th>
+      <th>Status</th>
+      <th>Failed items</th>
+      <th>Successfully captured items</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @batch_processes.each do |batch_process| %>
+      <% @batch_process = batch_process %>
+      <tr>
+        <td><%= batch_process.id %></td>
+        <td><%= link_to File.basename(batch_process.name.to_s), batch_process.name.to_s, target: "_blank" %></td>
+        <td><%= batch_process.image_data.count %></td>
+        <td><%= batch_process.get_status_name batch_process.status %></td>
+        <td><%= batch_process.failed  %></td>
+        <td><%= batch_process.completed %></td>
+        <td><%= link_to 'Show', "javascript:void(0);", class: "toggle-row" %></td>
+        <td id="refresh_<%= batch_process.id %>">
+          <%= link_to 'Destroy', batch_process, method: :delete, data: { confirm: 'Are you sure?' } if batch_process.can_destroy? %>
+        </td>
+        <td id="run_<%= batch_process.id %>">
+          <%= link_to 'Run', run_batch_process_path(batch_process), method: :put, data: { remote: true } if batch_process.can_run? %>
+        </td>
+      </tr>
+      <tr class="image-data-row hide">
+        <td colspan="9">
+          <%= render partial: "image_data", locals: { batch_image_data: batch_process.image_data } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<div class="pull-right"><%= will_paginate @batch_processes %></div>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  scale: 1
+  width: 1
+  height: 1
+  mortar_id: 1
+  material_id: 1
+  output: MyString
+  batch_process_id: 
+  stagger: 1
+  coursing: 1
+
+two:
+  scale: 1
+  width: 1
+  height: 1
+  mortar_id: 1
+  material_id: 1
+  output: MyString
+  batch_process_id: 
+  stagger: 1
+  coursing: 1

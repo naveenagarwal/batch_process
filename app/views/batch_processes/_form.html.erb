@@ -1,0 +1,85 @@
+<p>Upload CSV File</p>
+<%= form_for(@batch_process, html: { multipart: true }) do |f| %>
+  <% if @batch_process.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@batch_process.errors.count, "error") %> prohibited this batch_process from being saved:</h2>
+
+      <ul>
+      <% @batch_process.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "Upload File(should be in csv format)", class: "inline" %>
+    <%= f.file_field :name, required: "required" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
+<% end %>
+
+<h3>Or</h3>
+<p>
+  Enter details
+</p>
+
+<%= form_for(@batch_process, html: { multipart: true }) do |f| %>
+  <% if @batch_process.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@batch_process.errors.count, "error") %> prohibited this batch_process from being saved:</h2>
+
+      <ul>
+      <% @batch_process.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <input type="hidden" value="true" name="manual_entry" />
+
+  <div class="field">
+    <%= f.label :name, class: "inline" %>
+    <%= f.text_field :name, required: "required"%>
+  </div>
+  <p>Provide the details, all fields are required</p>
+  <div class="field" id="image_data_fields">
+    <div class="image-data-fields-row">
+      <%= label_tag "batch_process[image_data][][scale]", "Scale:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][scale]", 100, required: "required" %>
+
+      <%= label_tag "batch_process[image_data][][width]", "Width:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][width]", "", required: "required" %>
+
+      <%= label_tag "batch_process[image_data][][height]", "Height:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][height]", "", required: "required" %>
+
+      <%= label_tag "batch_process[image_data][][material]", "Material:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][material]", "", required: "required" %>
+
+      <br />
+
+      <%= label_tag "batch_process[image_data][][mortar]", "Mortar:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][mortar]", "", required: "required" %>
+
+      <%= label_tag "batch_process[image_data][][stagger]", "Stagger:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][stagger]", 2, required: "required" %>
+
+      <%= label_tag "batch_process[image_data][][coursing]", "Coursing:", class: "inline" %>
+      <%= number_field_tag "batch_process[image_data][][coursing]", 0, required: "required" %>
+
+      <%= label_tag "batch_process[image_data][][output]", "Output:", class: "inline" %>
+      <%= text_field_tag "batch_process[image_data][][output]", "", required: "required" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= link_to "Add new row", "javascript:void(0);", id: "add_new_row" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
+<% end %>

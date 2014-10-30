@@ -1,0 +1,5 @@
+<% if @batch_process.errors.blank? %>
+  $("td#run_" + <%= @batch_process.id %>).html('<%= @batch_process.get_status_name @batch_process.status %>');
+<% else %>
+  alert("Unable to run the batch at the moment.");
+<% end %>
